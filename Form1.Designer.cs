@@ -30,15 +30,28 @@ namespace PomocDlaDietetyka
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabPage = new System.Windows.Forms.TabControl();
             this.AddPatientTab = new System.Windows.Forms.TabPage();
-            this.Diseases = new System.Windows.Forms.RichTextBox();
+            this.DiseasesRichTextBox = new System.Windows.Forms.RichTextBox();
             this.dataOfPersonsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.appDataSet = new PomocDlaDietetyka.AppDataSet();
             this.EditEntriesBTN = new System.Windows.Forms.Button();
             this.SaveEntriesBTN = new System.Windows.Forms.Button();
             this.NewEntriesBTN = new System.Windows.Forms.Button();
             this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.surnameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dateOfBirthDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.heightDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.weightDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.diseasesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.describesOfPersonsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.iDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.addDiseaseBTN = new System.Windows.Forms.Button();
             this.describeOfPersonRichTextBox = new System.Windows.Forms.RichTextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -55,11 +68,13 @@ namespace PomocDlaDietetyka
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.CalculateBMITab = new System.Windows.Forms.TabPage();
+            this.WomenRadioButton = new System.Windows.Forms.RadioButton();
+            this.label8 = new System.Windows.Forms.Label();
+            this.MenRadioButton = new System.Windows.Forms.RadioButton();
+            this.CalculateBmiPpmBTN = new System.Windows.Forms.Button();
             this.PPMLBL = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.BMILBL = new System.Windows.Forms.Label();
-            this.recomendedDietLBL = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
             this.Food = new System.Windows.Forms.TabPage();
             this.amountOfCaloriesLBL = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
@@ -75,14 +90,6 @@ namespace PomocDlaDietetyka
             this.allowedFoodRichTextBox = new System.Windows.Forms.RichTextBox();
             this.ExampleDishes = new System.Windows.Forms.TabPage();
             this.dataOfPersonsBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.surnameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dateOfBirthDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.heightDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.weightDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.diseasesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.describesOfPersonsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.iDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage.SuspendLayout();
             this.AddPatientTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataOfPersonsBindingSource)).BeginInit();
@@ -101,18 +108,22 @@ namespace PomocDlaDietetyka
             this.tabPage.Controls.Add(this.Food);
             this.tabPage.Controls.Add(this.ExampleDishes);
             this.tabPage.Font = new System.Drawing.Font("Microsoft YaHei", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabPage.HotTrack = true;
             this.tabPage.ItemSize = new System.Drawing.Size(140, 36);
             this.tabPage.Location = new System.Drawing.Point(12, 1);
             this.tabPage.Multiline = true;
             this.tabPage.Name = "tabPage";
             this.tabPage.SelectedIndex = 0;
+            this.tabPage.ShowToolTips = true;
             this.tabPage.Size = new System.Drawing.Size(574, 476);
             this.tabPage.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabPage.TabIndex = 0;
             // 
             // AddPatientTab
             // 
-            this.AddPatientTab.Controls.Add(this.Diseases);
+            this.AddPatientTab.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.AddPatientTab.BackgroundImage = global::PomocDlaDietetyka.Properties.Resources.Minimalist_Crumpled_Paper_Simple_Background_Image;
+            this.AddPatientTab.Controls.Add(this.DiseasesRichTextBox);
             this.AddPatientTab.Controls.Add(this.EditEntriesBTN);
             this.AddPatientTab.Controls.Add(this.SaveEntriesBTN);
             this.AddPatientTab.Controls.Add(this.NewEntriesBTN);
@@ -132,24 +143,27 @@ namespace PomocDlaDietetyka
             this.AddPatientTab.Controls.Add(this.label3);
             this.AddPatientTab.Controls.Add(this.label2);
             this.AddPatientTab.Controls.Add(this.label1);
-            this.AddPatientTab.Font = new System.Drawing.Font("Microsoft YaHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AddPatientTab.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.AddPatientTab.ForeColor = System.Drawing.Color.Black;
             this.AddPatientTab.Location = new System.Drawing.Point(4, 40);
             this.AddPatientTab.Name = "AddPatientTab";
             this.AddPatientTab.Padding = new System.Windows.Forms.Padding(3);
             this.AddPatientTab.Size = new System.Drawing.Size(566, 432);
             this.AddPatientTab.TabIndex = 0;
             this.AddPatientTab.Text = "Dodaj Pacjenta";
-            this.AddPatientTab.UseVisualStyleBackColor = true;
             this.AddPatientTab.Click += new System.EventHandler(this.AddPatientTab_Click);
             // 
-            // Diseases
+            // DiseasesRichTextBox
             // 
-            this.Diseases.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.dataOfPersonsBindingSource, "Diseases", true));
-            this.Diseases.Location = new System.Drawing.Point(6, 224);
-            this.Diseases.Name = "Diseases";
-            this.Diseases.Size = new System.Drawing.Size(198, 164);
-            this.Diseases.TabIndex = 26;
-            this.Diseases.Text = "";
+            this.DiseasesRichTextBox.BackColor = System.Drawing.Color.Azure;
+            this.DiseasesRichTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.DiseasesRichTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.dataOfPersonsBindingSource, "Diseases", true));
+            this.DiseasesRichTextBox.Font = new System.Drawing.Font("Microsoft YaHei", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.DiseasesRichTextBox.Location = new System.Drawing.Point(6, 237);
+            this.DiseasesRichTextBox.Name = "DiseasesRichTextBox";
+            this.DiseasesRichTextBox.Size = new System.Drawing.Size(198, 189);
+            this.DiseasesRichTextBox.TabIndex = 26;
+            this.DiseasesRichTextBox.Text = "";
             // 
             // dataOfPersonsBindingSource
             // 
@@ -163,6 +177,8 @@ namespace PomocDlaDietetyka
             // 
             // EditEntriesBTN
             // 
+            this.EditEntriesBTN.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.EditEntriesBTN.Image = global::PomocDlaDietetyka.Properties.Resources.Minimalist_Crumpled_Paper_Simple_Background_Image;
             this.EditEntriesBTN.Location = new System.Drawing.Point(356, 394);
             this.EditEntriesBTN.Name = "EditEntriesBTN";
             this.EditEntriesBTN.Size = new System.Drawing.Size(75, 32);
@@ -173,6 +189,8 @@ namespace PomocDlaDietetyka
             // 
             // SaveEntriesBTN
             // 
+            this.SaveEntriesBTN.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.SaveEntriesBTN.Image = global::PomocDlaDietetyka.Properties.Resources.Minimalist_Crumpled_Paper_Simple_Background_Image;
             this.SaveEntriesBTN.Location = new System.Drawing.Point(482, 394);
             this.SaveEntriesBTN.Name = "SaveEntriesBTN";
             this.SaveEntriesBTN.Size = new System.Drawing.Size(75, 32);
@@ -183,6 +201,8 @@ namespace PomocDlaDietetyka
             // 
             // NewEntriesBTN
             // 
+            this.NewEntriesBTN.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.NewEntriesBTN.Image = global::PomocDlaDietetyka.Properties.Resources.Minimalist_Crumpled_Paper_Simple_Background_Image;
             this.NewEntriesBTN.Location = new System.Drawing.Point(216, 394);
             this.NewEntriesBTN.Name = "NewEntriesBTN";
             this.NewEntriesBTN.Size = new System.Drawing.Size(75, 32);
@@ -194,10 +214,22 @@ namespace PomocDlaDietetyka
             // dataGridView
             // 
             this.dataGridView.AllowUserToAddRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Azure;
+            this.dataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView.AutoGenerateColumns = false;
+            this.dataGridView.BackgroundColor = System.Drawing.Color.Ivory;
+            this.dataGridView.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Azure;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column1,
+            this.nameDataGridViewTextBoxColumn,
             this.surnameDataGridViewTextBoxColumn,
             this.dateOfBirthDataGridViewTextBoxColumn,
             this.heightDataGridViewTextBoxColumn,
@@ -206,24 +238,101 @@ namespace PomocDlaDietetyka
             this.describesOfPersonsDataGridViewTextBoxColumn,
             this.iDDataGridViewTextBoxColumn});
             this.dataGridView.DataSource = this.dataOfPersonsBindingSource;
-            this.dataGridView.Location = new System.Drawing.Point(216, 224);
+            this.dataGridView.GridColor = System.Drawing.Color.Silver;
+            this.dataGridView.Location = new System.Drawing.Point(216, 237);
             this.dataGridView.Name = "dataGridView";
-            this.dataGridView.Size = new System.Drawing.Size(344, 164);
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.Azure;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.Azure;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
+            this.dataGridView.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            this.dataGridView.Size = new System.Drawing.Size(341, 151);
             this.dataGridView.TabIndex = 21;
             this.dataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridView_KeyDown);
             // 
+            // nameDataGridViewTextBoxColumn
+            // 
+            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            this.nameDataGridViewTextBoxColumn.HeaderText = "Imię";
+            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            this.nameDataGridViewTextBoxColumn.Width = 150;
+            // 
+            // surnameDataGridViewTextBoxColumn
+            // 
+            this.surnameDataGridViewTextBoxColumn.DataPropertyName = "Surname";
+            this.surnameDataGridViewTextBoxColumn.HeaderText = "Nazwisko";
+            this.surnameDataGridViewTextBoxColumn.Name = "surnameDataGridViewTextBoxColumn";
+            this.surnameDataGridViewTextBoxColumn.Width = 150;
+            // 
+            // dateOfBirthDataGridViewTextBoxColumn
+            // 
+            this.dateOfBirthDataGridViewTextBoxColumn.DataPropertyName = "DateOfBirth";
+            this.dateOfBirthDataGridViewTextBoxColumn.HeaderText = "DateOfBirth";
+            this.dateOfBirthDataGridViewTextBoxColumn.Name = "dateOfBirthDataGridViewTextBoxColumn";
+            this.dateOfBirthDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // heightDataGridViewTextBoxColumn
+            // 
+            this.heightDataGridViewTextBoxColumn.DataPropertyName = "Height";
+            this.heightDataGridViewTextBoxColumn.HeaderText = "Height";
+            this.heightDataGridViewTextBoxColumn.Name = "heightDataGridViewTextBoxColumn";
+            this.heightDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // weightDataGridViewTextBoxColumn
+            // 
+            this.weightDataGridViewTextBoxColumn.DataPropertyName = "Weight";
+            this.weightDataGridViewTextBoxColumn.HeaderText = "Weight";
+            this.weightDataGridViewTextBoxColumn.Name = "weightDataGridViewTextBoxColumn";
+            this.weightDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // diseasesDataGridViewTextBoxColumn
+            // 
+            this.diseasesDataGridViewTextBoxColumn.DataPropertyName = "Diseases";
+            this.diseasesDataGridViewTextBoxColumn.HeaderText = "Diseases";
+            this.diseasesDataGridViewTextBoxColumn.Name = "diseasesDataGridViewTextBoxColumn";
+            this.diseasesDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // describesOfPersonsDataGridViewTextBoxColumn
+            // 
+            this.describesOfPersonsDataGridViewTextBoxColumn.DataPropertyName = "DescribesOfPersons";
+            this.describesOfPersonsDataGridViewTextBoxColumn.HeaderText = "DescribesOfPersons";
+            this.describesOfPersonsDataGridViewTextBoxColumn.Name = "describesOfPersonsDataGridViewTextBoxColumn";
+            this.describesOfPersonsDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // iDDataGridViewTextBoxColumn
+            // 
+            this.iDDataGridViewTextBoxColumn.DataPropertyName = "ID";
+            this.iDDataGridViewTextBoxColumn.HeaderText = "ID";
+            this.iDDataGridViewTextBoxColumn.Name = "iDDataGridViewTextBoxColumn";
+            this.iDDataGridViewTextBoxColumn.Visible = false;
+            // 
             // addDiseaseBTN
             // 
-            this.addDiseaseBTN.Location = new System.Drawing.Point(171, 169);
+            this.addDiseaseBTN.BackgroundImage = global::PomocDlaDietetyka.Properties.Resources.Minimalist_Crumpled_Paper_Simple_Background_Image;
+            this.addDiseaseBTN.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.addDiseaseBTN.Font = new System.Drawing.Font("Microsoft YaHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.addDiseaseBTN.Image = global::PomocDlaDietetyka.Properties.Resources.Minimalist_Crumpled_Paper_Simple_Background_Image;
+            this.addDiseaseBTN.Location = new System.Drawing.Point(171, 173);
             this.addDiseaseBTN.Name = "addDiseaseBTN";
             this.addDiseaseBTN.Size = new System.Drawing.Size(123, 29);
             this.addDiseaseBTN.TabIndex = 18;
             this.addDiseaseBTN.Text = "Dodaj Chorobę";
             this.addDiseaseBTN.UseVisualStyleBackColor = true;
+            this.addDiseaseBTN.Click += new System.EventHandler(this.addDiseaseBTN_Click);
             // 
             // describeOfPersonRichTextBox
             // 
+            this.describeOfPersonRichTextBox.BackColor = System.Drawing.Color.Azure;
+            this.describeOfPersonRichTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.describeOfPersonRichTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.dataOfPersonsBindingSource, "DescribesOfPersons", true));
+            this.describeOfPersonRichTextBox.Font = new System.Drawing.Font("Microsoft YaHei", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.describeOfPersonRichTextBox.Location = new System.Drawing.Point(330, 52);
             this.describeOfPersonRichTextBox.Name = "describeOfPersonRichTextBox";
             this.describeOfPersonRichTextBox.Size = new System.Drawing.Size(227, 146);
@@ -233,121 +342,147 @@ namespace PomocDlaDietetyka
             // label7
             // 
             this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(230)))));
             this.label7.Location = new System.Drawing.Point(326, 13);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(211, 20);
+            this.label7.Size = new System.Drawing.Size(223, 21);
             this.label7.TabIndex = 14;
             this.label7.Text = "Opis Pacjenta i jego Chorób";
             // 
             // diseasesComboBox
             // 
+            this.diseasesComboBox.BackColor = System.Drawing.Color.Azure;
+            this.diseasesComboBox.Font = new System.Drawing.Font("Microsoft YaHei", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.diseasesComboBox.FormattingEnabled = true;
             this.diseasesComboBox.Location = new System.Drawing.Point(0, 169);
             this.diseasesComboBox.Name = "diseasesComboBox";
-            this.diseasesComboBox.Size = new System.Drawing.Size(165, 28);
+            this.diseasesComboBox.Size = new System.Drawing.Size(165, 33);
             this.diseasesComboBox.TabIndex = 13;
             // 
             // SurnameOfPersonTXT
             // 
+            this.SurnameOfPersonTXT.BackColor = System.Drawing.Color.Azure;
+            this.SurnameOfPersonTXT.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.SurnameOfPersonTXT.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.dataOfPersonsBindingSource, "Surname", true));
+            this.SurnameOfPersonTXT.Font = new System.Drawing.Font("Microsoft YaHei", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.SurnameOfPersonTXT.Location = new System.Drawing.Point(0, 41);
             this.SurnameOfPersonTXT.Name = "SurnameOfPersonTXT";
-            this.SurnameOfPersonTXT.Size = new System.Drawing.Size(106, 27);
+            this.SurnameOfPersonTXT.Size = new System.Drawing.Size(106, 26);
             this.SurnameOfPersonTXT.TabIndex = 12;
             // 
             // dateOfBirthTXT
             // 
+            this.dateOfBirthTXT.BackColor = System.Drawing.Color.Azure;
+            this.dateOfBirthTXT.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dateOfBirthTXT.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.dataOfPersonsBindingSource, "DateOfBirth", true));
+            this.dateOfBirthTXT.Font = new System.Drawing.Font("Microsoft YaHei", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.dateOfBirthTXT.Location = new System.Drawing.Point(0, 72);
             this.dateOfBirthTXT.Name = "dateOfBirthTXT";
-            this.dateOfBirthTXT.Size = new System.Drawing.Size(106, 27);
+            this.dateOfBirthTXT.Size = new System.Drawing.Size(106, 26);
             this.dateOfBirthTXT.TabIndex = 11;
             // 
             // heighOfPersonTXT
             // 
+            this.heighOfPersonTXT.BackColor = System.Drawing.Color.Azure;
+            this.heighOfPersonTXT.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.heighOfPersonTXT.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.dataOfPersonsBindingSource, "Height", true));
+            this.heighOfPersonTXT.Font = new System.Drawing.Font("Microsoft YaHei", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.heighOfPersonTXT.Location = new System.Drawing.Point(0, 103);
             this.heighOfPersonTXT.Name = "heighOfPersonTXT";
-            this.heighOfPersonTXT.Size = new System.Drawing.Size(106, 27);
+            this.heighOfPersonTXT.Size = new System.Drawing.Size(106, 26);
             this.heighOfPersonTXT.TabIndex = 10;
             // 
             // WeightOfPersonTXT
             // 
+            this.WeightOfPersonTXT.BackColor = System.Drawing.Color.Azure;
+            this.WeightOfPersonTXT.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.WeightOfPersonTXT.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.dataOfPersonsBindingSource, "Weight", true));
+            this.WeightOfPersonTXT.Font = new System.Drawing.Font("Microsoft YaHei", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.WeightOfPersonTXT.Location = new System.Drawing.Point(0, 134);
             this.WeightOfPersonTXT.Name = "WeightOfPersonTXT";
-            this.WeightOfPersonTXT.Size = new System.Drawing.Size(106, 27);
+            this.WeightOfPersonTXT.Size = new System.Drawing.Size(106, 26);
             this.WeightOfPersonTXT.TabIndex = 9;
             // 
             // NameOfPersonTXT
             // 
+            this.NameOfPersonTXT.BackColor = System.Drawing.Color.Azure;
+            this.NameOfPersonTXT.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.NameOfPersonTXT.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.dataOfPersonsBindingSource, "Name", true));
+            this.NameOfPersonTXT.Font = new System.Drawing.Font("Microsoft YaHei", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.NameOfPersonTXT.Location = new System.Drawing.Point(0, 10);
             this.NameOfPersonTXT.Name = "NameOfPersonTXT";
-            this.NameOfPersonTXT.Size = new System.Drawing.Size(106, 27);
+            this.NameOfPersonTXT.Size = new System.Drawing.Size(106, 26);
             this.NameOfPersonTXT.TabIndex = 8;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(112, 109);
+            this.label6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(230)))));
+            this.label6.Location = new System.Drawing.Point(112, 107);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(92, 20);
+            this.label6.Size = new System.Drawing.Size(96, 21);
             this.label6.TabIndex = 6;
             this.label6.Text = "Wzrost(cm)";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(230)))));
             this.label5.Location = new System.Drawing.Point(112, 137);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(78, 20);
+            this.label5.Size = new System.Drawing.Size(83, 21);
             this.label5.TabIndex = 5;
             this.label5.Text = "Waga(kg)";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(112, 75);
+            this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(230)))));
+            this.label4.Location = new System.Drawing.Point(112, 76);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(212, 20);
+            this.label4.Size = new System.Drawing.Size(225, 21);
             this.label4.TabIndex = 4;
             this.label4.Text = "Data urodzenia(rrrr-mm-dd)";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(112, 44);
+            this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(230)))));
+            this.label3.Location = new System.Drawing.Point(112, 45);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(77, 20);
+            this.label3.Size = new System.Drawing.Size(83, 21);
             this.label3.TabIndex = 3;
             this.label3.Text = "Nazwisko";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(112, 13);
+            this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(230)))));
+            this.label2.Location = new System.Drawing.Point(112, 14);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(40, 20);
+            this.label2.Size = new System.Drawing.Size(43, 21);
             this.label2.TabIndex = 2;
             this.label2.Text = "Imię";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(228, 201);
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(230)))));
+            this.label1.Location = new System.Drawing.Point(326, 214);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(121, 20);
+            this.label1.Size = new System.Drawing.Size(128, 21);
             this.label1.TabIndex = 1;
             this.label1.Text = "Lista Pacjentów";
             // 
             // CalculateBMITab
             // 
+            this.CalculateBMITab.Controls.Add(this.WomenRadioButton);
+            this.CalculateBMITab.Controls.Add(this.label8);
+            this.CalculateBMITab.Controls.Add(this.MenRadioButton);
+            this.CalculateBMITab.Controls.Add(this.CalculateBmiPpmBTN);
             this.CalculateBMITab.Controls.Add(this.PPMLBL);
             this.CalculateBMITab.Controls.Add(this.label12);
             this.CalculateBMITab.Controls.Add(this.BMILBL);
-            this.CalculateBMITab.Controls.Add(this.recomendedDietLBL);
-            this.CalculateBMITab.Controls.Add(this.label8);
             this.CalculateBMITab.Font = new System.Drawing.Font("Microsoft YaHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CalculateBMITab.Location = new System.Drawing.Point(4, 40);
             this.CalculateBMITab.Name = "CalculateBMITab";
@@ -357,10 +492,52 @@ namespace PomocDlaDietetyka
             this.CalculateBMITab.Text = "Oblicz BMI, PPM";
             this.CalculateBMITab.UseVisualStyleBackColor = true;
             // 
+            // WomenRadioButton
+            // 
+            this.WomenRadioButton.AutoSize = true;
+            this.WomenRadioButton.Location = new System.Drawing.Point(353, 32);
+            this.WomenRadioButton.Name = "WomenRadioButton";
+            this.WomenRadioButton.Size = new System.Drawing.Size(84, 24);
+            this.WomenRadioButton.TabIndex = 26;
+            this.WomenRadioButton.TabStop = true;
+            this.WomenRadioButton.Text = "Kobieta";
+            this.WomenRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(118, 34);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(108, 20);
+            this.label8.TabIndex = 25;
+            this.label8.Text = "Płeć Pacjenta:";
+            // 
+            // MenRadioButton
+            // 
+            this.MenRadioButton.AutoSize = true;
+            this.MenRadioButton.Location = new System.Drawing.Point(232, 32);
+            this.MenRadioButton.Name = "MenRadioButton";
+            this.MenRadioButton.Size = new System.Drawing.Size(115, 24);
+            this.MenRadioButton.TabIndex = 24;
+            this.MenRadioButton.TabStop = true;
+            this.MenRadioButton.Text = "Mężczyzna /";
+            this.MenRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // CalculateBmiPpmBTN
+            // 
+            this.CalculateBmiPpmBTN.Font = new System.Drawing.Font("Microsoft YaHei", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.CalculateBmiPpmBTN.Location = new System.Drawing.Point(212, 83);
+            this.CalculateBmiPpmBTN.Name = "CalculateBmiPpmBTN";
+            this.CalculateBmiPpmBTN.Size = new System.Drawing.Size(126, 50);
+            this.CalculateBmiPpmBTN.TabIndex = 23;
+            this.CalculateBmiPpmBTN.Text = "Oblicz";
+            this.CalculateBmiPpmBTN.UseVisualStyleBackColor = true;
+            this.CalculateBmiPpmBTN.Click += new System.EventHandler(this.CalculateBmiPpmBTN_Click);
+            // 
             // PPMLBL
             // 
             this.PPMLBL.AutoSize = true;
-            this.PPMLBL.Location = new System.Drawing.Point(498, 22);
+            this.PPMLBL.Location = new System.Drawing.Point(514, 113);
             this.PPMLBL.Name = "PPMLBL";
             this.PPMLBL.Size = new System.Drawing.Size(46, 20);
             this.PPMLBL.TabIndex = 22;
@@ -378,29 +555,11 @@ namespace PomocDlaDietetyka
             // BMILBL
             // 
             this.BMILBL.AutoSize = true;
-            this.BMILBL.Location = new System.Drawing.Point(6, 22);
+            this.BMILBL.Location = new System.Drawing.Point(6, 113);
             this.BMILBL.Name = "BMILBL";
             this.BMILBL.Size = new System.Drawing.Size(41, 20);
             this.BMILBL.TabIndex = 20;
             this.BMILBL.Text = "BMI:";
-            // 
-            // recomendedDietLBL
-            // 
-            this.recomendedDietLBL.AutoSize = true;
-            this.recomendedDietLBL.Location = new System.Drawing.Point(251, 263);
-            this.recomendedDietLBL.Name = "recomendedDietLBL";
-            this.recomendedDietLBL.Size = new System.Drawing.Size(53, 20);
-            this.recomendedDietLBL.TabIndex = 19;
-            this.recomendedDietLBL.Text = "label9";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(229, 232);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(118, 20);
-            this.label8.TabIndex = 18;
-            this.label8.Text = "Zalecana Dieta:";
             // 
             // Food
             // 
@@ -545,71 +704,19 @@ namespace PomocDlaDietetyka
             this.dataOfPersonsBindingSource1.DataMember = "DataOfPersons";
             this.dataOfPersonsBindingSource1.DataSource = this.appDataSet;
             // 
-            // Column1
-            // 
-            this.Column1.DataPropertyName = "Name";
-            this.Column1.HeaderText = "Imię";
-            this.Column1.Name = "Column1";
-            this.Column1.Width = 150;
-            // 
-            // surnameDataGridViewTextBoxColumn
-            // 
-            this.surnameDataGridViewTextBoxColumn.DataPropertyName = "Surname";
-            this.surnameDataGridViewTextBoxColumn.HeaderText = "Nazwisko";
-            this.surnameDataGridViewTextBoxColumn.Name = "surnameDataGridViewTextBoxColumn";
-            this.surnameDataGridViewTextBoxColumn.Width = 150;
-            // 
-            // dateOfBirthDataGridViewTextBoxColumn
-            // 
-            this.dateOfBirthDataGridViewTextBoxColumn.DataPropertyName = "DateOfBirth";
-            this.dateOfBirthDataGridViewTextBoxColumn.HeaderText = "DateOfBirth";
-            this.dateOfBirthDataGridViewTextBoxColumn.Name = "dateOfBirthDataGridViewTextBoxColumn";
-            this.dateOfBirthDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // heightDataGridViewTextBoxColumn
-            // 
-            this.heightDataGridViewTextBoxColumn.DataPropertyName = "Height";
-            this.heightDataGridViewTextBoxColumn.HeaderText = "Height";
-            this.heightDataGridViewTextBoxColumn.Name = "heightDataGridViewTextBoxColumn";
-            this.heightDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // weightDataGridViewTextBoxColumn
-            // 
-            this.weightDataGridViewTextBoxColumn.DataPropertyName = "Weight";
-            this.weightDataGridViewTextBoxColumn.HeaderText = "Weight";
-            this.weightDataGridViewTextBoxColumn.Name = "weightDataGridViewTextBoxColumn";
-            this.weightDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // diseasesDataGridViewTextBoxColumn
-            // 
-            this.diseasesDataGridViewTextBoxColumn.DataPropertyName = "Diseases";
-            this.diseasesDataGridViewTextBoxColumn.HeaderText = "Diseases";
-            this.diseasesDataGridViewTextBoxColumn.Name = "diseasesDataGridViewTextBoxColumn";
-            this.diseasesDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // describesOfPersonsDataGridViewTextBoxColumn
-            // 
-            this.describesOfPersonsDataGridViewTextBoxColumn.DataPropertyName = "DescribesOfPersons";
-            this.describesOfPersonsDataGridViewTextBoxColumn.HeaderText = "DescribesOfPersons";
-            this.describesOfPersonsDataGridViewTextBoxColumn.Name = "describesOfPersonsDataGridViewTextBoxColumn";
-            this.describesOfPersonsDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // iDDataGridViewTextBoxColumn
-            // 
-            this.iDDataGridViewTextBoxColumn.DataPropertyName = "ID";
-            this.iDDataGridViewTextBoxColumn.HeaderText = "ID";
-            this.iDDataGridViewTextBoxColumn.Name = "iDDataGridViewTextBoxColumn";
-            this.iDDataGridViewTextBoxColumn.Visible = false;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(592, 480);
+            this.BackgroundImage = global::PomocDlaDietetyka.Properties.Resources.Minimalist_Crumpled_Paper_Simple_Background_Image;
+            this.CancelButton = this.addDiseaseBTN;
+            this.ClientSize = new System.Drawing.Size(590, 479);
             this.Controls.Add(this.tabPage);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "                                                                   Pomoc dla Diet" +
     "etyka";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.tabPage.ResumeLayout(false);
             this.AddPatientTab.ResumeLayout(false);
             this.AddPatientTab.PerformLayout();
@@ -640,8 +747,6 @@ namespace PomocDlaDietetyka
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label BMILBL;
-        private System.Windows.Forms.Label recomendedDietLBL;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TabPage Food;
         private System.Windows.Forms.Label PPMLBL;
         private System.Windows.Forms.RichTextBox allowedFoodRichTextBox;
@@ -668,11 +773,15 @@ namespace PomocDlaDietetyka
         private System.Windows.Forms.BindingSource dataOfPersonsBindingSource;
         private AppDataSet appDataSet;
         private System.Windows.Forms.BindingSource dataOfPersonsBindingSource1;
-        private System.Windows.Forms.RichTextBox Diseases;
+        private System.Windows.Forms.RichTextBox DiseasesRichTextBox;
         private System.Windows.Forms.Button EditEntriesBTN;
         private System.Windows.Forms.Button SaveEntriesBTN;
         private System.Windows.Forms.Button NewEntriesBTN;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.RadioButton MenRadioButton;
+        private System.Windows.Forms.Button CalculateBmiPpmBTN;
+        private System.Windows.Forms.RadioButton WomenRadioButton;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn surnameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dateOfBirthDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn heightDataGridViewTextBoxColumn;

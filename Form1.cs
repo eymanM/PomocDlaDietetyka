@@ -17,11 +17,11 @@ namespace PomocDlaDietetyka
         public Form1()
         {
             InitializeComponent();
-            Form1_Load();         
+            Form1_Load();
         }
         static AppDataSet db;
         protected static AppDataSet App
-        { 
+        {
             get
             {
                 if (db == null)
@@ -42,8 +42,7 @@ namespace PomocDlaDietetyka
                 App.DataOfPersons.ReadXml(filename);
             dataOfPersonsBindingSource.DataSource = App.DataOfPersons;
         }
-        
-       
+
 
         private void NewEntriesBTN_Click(object sender, EventArgs e)
         {
@@ -53,7 +52,7 @@ namespace PomocDlaDietetyka
                 dataOfPersonsBindingSource.MoveLast();
                 NameOfPersonTXT.Focus();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 App.DataOfPersons.RejectChanges();
@@ -70,10 +69,7 @@ namespace PomocDlaDietetyka
 
         }
 
-        private void CancelEntriesBTN_Click(object sender, EventArgs e)
-        {
-            dataOfPersonsBindingSource.ResetBindings(false);
-        }
+     
 
         private void SaveEntriesBTN_Click(object sender, EventArgs e)
         {
@@ -92,11 +88,33 @@ namespace PomocDlaDietetyka
 
         private void dataGridView_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Delete)
+            if (e.KeyCode == Keys.Delete)
             {
                 if (MessageBox.Show("Czy napewno chcesz usunąć ten wpis?", "Wiadomość", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     dataOfPersonsBindingSource.RemoveCurrent();
             }
         }
-    }
+
+        private void addDiseaseBTN_Click(object sender, EventArgs e)
+        {
+            DiseasesRichTextBox.AppendText(diseasesComboBox.SelectedItem.ToString() + "\n");
+        }
+
+        private void CalculateBmiPpmBTN_Click(object sender, EventArgs e)
+        {
+            if(MenRadioButton.Checked)
+            {
+
+            }
+            if(WomenRadioButton.Checked)
+            {
+
+            }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+    }   
 }
