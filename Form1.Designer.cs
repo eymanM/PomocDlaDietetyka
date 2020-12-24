@@ -90,6 +90,7 @@ namespace PomocDlaDietetyka
             this.allowedFoodRichTextBox = new System.Windows.Forms.RichTextBox();
             this.ExampleDishes = new System.Windows.Forms.TabPage();
             this.dataOfPersonsBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.tabPage.SuspendLayout();
             this.AddPatientTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataOfPersonsBindingSource)).BeginInit();
@@ -98,6 +99,7 @@ namespace PomocDlaDietetyka
             this.CalculateBMITab.SuspendLayout();
             this.Food.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataOfPersonsBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // tabPage
@@ -255,6 +257,8 @@ namespace PomocDlaDietetyka
             this.dataGridView.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView.Size = new System.Drawing.Size(341, 151);
             this.dataGridView.TabIndex = 21;
+            this.dataGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellClick);
+            this.dataGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellContentClick);
             this.dataGridView.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridView_KeyDown);
             // 
             // nameDataGridViewTextBoxColumn
@@ -387,10 +391,12 @@ namespace PomocDlaDietetyka
             this.heighOfPersonTXT.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.heighOfPersonTXT.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.dataOfPersonsBindingSource, "Height", true));
             this.heighOfPersonTXT.Font = new System.Drawing.Font("Microsoft YaHei", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.heighOfPersonTXT.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.heighOfPersonTXT.Location = new System.Drawing.Point(0, 103);
             this.heighOfPersonTXT.Name = "heighOfPersonTXT";
             this.heighOfPersonTXT.Size = new System.Drawing.Size(106, 26);
             this.heighOfPersonTXT.TabIndex = 10;
+            this.heighOfPersonTXT.Validating += new System.ComponentModel.CancelEventHandler(this.heighOfPersonTXT_Validating);
             // 
             // WeightOfPersonTXT
             // 
@@ -420,9 +426,9 @@ namespace PomocDlaDietetyka
             this.label6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(230)))));
             this.label6.Location = new System.Drawing.Point(112, 107);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(96, 21);
+            this.label6.Size = new System.Drawing.Size(88, 21);
             this.label6.TabIndex = 6;
-            this.label6.Text = "Wzrost(cm)";
+            this.label6.Text = "Wzrost(m)";
             // 
             // label5
             // 
@@ -476,6 +482,7 @@ namespace PomocDlaDietetyka
             // 
             // CalculateBMITab
             // 
+            this.CalculateBMITab.BackgroundImage = global::PomocDlaDietetyka.Properties.Resources.Minimalist_Crumpled_Paper_Simple_Background_Image;
             this.CalculateBMITab.Controls.Add(this.WomenRadioButton);
             this.CalculateBMITab.Controls.Add(this.label8);
             this.CalculateBMITab.Controls.Add(this.MenRadioButton);
@@ -525,8 +532,9 @@ namespace PomocDlaDietetyka
             // 
             // CalculateBmiPpmBTN
             // 
+            this.CalculateBmiPpmBTN.BackgroundImage = global::PomocDlaDietetyka.Properties.Resources.Minimalist_Crumpled_Paper_Simple_Background_Image;
             this.CalculateBmiPpmBTN.Font = new System.Drawing.Font("Microsoft YaHei", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.CalculateBmiPpmBTN.Location = new System.Drawing.Point(212, 83);
+            this.CalculateBmiPpmBTN.Location = new System.Drawing.Point(10, 75);
             this.CalculateBmiPpmBTN.Name = "CalculateBmiPpmBTN";
             this.CalculateBmiPpmBTN.Size = new System.Drawing.Size(126, 50);
             this.CalculateBmiPpmBTN.TabIndex = 23;
@@ -537,9 +545,10 @@ namespace PomocDlaDietetyka
             // PPMLBL
             // 
             this.PPMLBL.AutoSize = true;
-            this.PPMLBL.Location = new System.Drawing.Point(514, 113);
+            this.PPMLBL.Font = new System.Drawing.Font("Microsoft YaHei", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.PPMLBL.Location = new System.Drawing.Point(6, 191);
             this.PPMLBL.Name = "PPMLBL";
-            this.PPMLBL.Size = new System.Drawing.Size(46, 20);
+            this.PPMLBL.Size = new System.Drawing.Size(60, 25);
             this.PPMLBL.TabIndex = 22;
             this.PPMLBL.Text = "PPM:";
             // 
@@ -555,14 +564,16 @@ namespace PomocDlaDietetyka
             // BMILBL
             // 
             this.BMILBL.AutoSize = true;
-            this.BMILBL.Location = new System.Drawing.Point(6, 113);
+            this.BMILBL.Font = new System.Drawing.Font("Microsoft YaHei", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.BMILBL.Location = new System.Drawing.Point(11, 149);
             this.BMILBL.Name = "BMILBL";
-            this.BMILBL.Size = new System.Drawing.Size(41, 20);
+            this.BMILBL.Size = new System.Drawing.Size(54, 25);
             this.BMILBL.TabIndex = 20;
             this.BMILBL.Text = "BMI:";
             // 
             // Food
             // 
+            this.Food.BackgroundImage = global::PomocDlaDietetyka.Properties.Resources.Minimalist_Crumpled_Paper_Simple_Background_Image;
             this.Food.Controls.Add(this.amountOfCaloriesLBL);
             this.Food.Controls.Add(this.label15);
             this.Food.Controls.Add(this.deleteFromBracketBTN);
@@ -576,6 +587,7 @@ namespace PomocDlaDietetyka
             this.Food.Controls.Add(this.label13);
             this.Food.Controls.Add(this.allowedFoodRichTextBox);
             this.Food.Font = new System.Drawing.Font("Microsoft YaHei", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Food.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Food.Location = new System.Drawing.Point(4, 40);
             this.Food.Name = "Food";
             this.Food.Padding = new System.Windows.Forms.Padding(3);
@@ -704,6 +716,10 @@ namespace PomocDlaDietetyka
             this.dataOfPersonsBindingSource1.DataMember = "DataOfPersons";
             this.dataOfPersonsBindingSource1.DataSource = this.appDataSet;
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -728,6 +744,7 @@ namespace PomocDlaDietetyka
             this.Food.ResumeLayout(false);
             this.Food.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataOfPersonsBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -747,7 +764,6 @@ namespace PomocDlaDietetyka
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label BMILBL;
-        private System.Windows.Forms.TabPage Food;
         private System.Windows.Forms.Label PPMLBL;
         private System.Windows.Forms.RichTextBox allowedFoodRichTextBox;
         private System.Windows.Forms.ListBox listBox1;
@@ -789,6 +805,8 @@ namespace PomocDlaDietetyka
         private System.Windows.Forms.DataGridViewTextBoxColumn diseasesDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn describesOfPersonsDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn iDDataGridViewTextBoxColumn;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.TabPage Food;
     }
 }
 

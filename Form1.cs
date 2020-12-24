@@ -20,6 +20,8 @@ namespace PomocDlaDietetyka
             Form1_Load();
         }
         static AppDataSet db;
+        string[] allowedFood = File.ReadAllLines("ChorobyZalecana.txt");       
+        string[] notAllowedFood = File.ReadAllLines("ChorobyNiezalecana.txt");
         protected static AppDataSet App
         {
             get
@@ -34,13 +36,15 @@ namespace PomocDlaDietetyka
             diseasesComboBox.Text = "Dodaj choroby";
             bracketComboBox.Text = "Wybierz żywność";
             WeighOfFoodTXT.Text = "Podaj wagę";
-            diseasesComboBox.Items.Add("dfwsde");
-            diseasesComboBox.Items.Add("dfw");
-            diseasesComboBox.Items.Add("dfwsdfsdfse");
             string filename = string.Format("{0}//data.dat", Application.StartupPath);
             if (File.Exists(filename))
                 App.DataOfPersons.ReadXml(filename);
             dataOfPersonsBindingSource.DataSource = App.DataOfPersons;
+            foreach (var line in allowedFood)
+            {
+                string[] tokens = line.Split(',');
+                diseasesComboBox.Items.Add(tokens[0]);
+            }
         }
 
 
@@ -66,7 +70,7 @@ namespace PomocDlaDietetyka
 
         private void AddPatientTab_Click(object sender, EventArgs e)
         {
-
+            
         }
 
      
@@ -97,24 +101,101 @@ namespace PomocDlaDietetyka
 
         private void addDiseaseBTN_Click(object sender, EventArgs e)
         {
-            DiseasesRichTextBox.AppendText(diseasesComboBox.SelectedItem.ToString() + "\n");
+            if (DiseasesRichTextBox.Text == string.Empty)
+                DiseasesRichTextBox.AppendText(diseasesComboBox.SelectedItem.ToString());
+
+            else if (DiseasesRichTextBox.Text != string.Empty)
+                DiseasesRichTextBox.AppendText("\n" + diseasesComboBox.SelectedItem.ToString());
+                      
+            diseasesComboBox.Text = "Dodaj choroby";
         }
 
         private void CalculateBmiPpmBTN_Click(object sender, EventArgs e)
         {
-            if(MenRadioButton.Checked)
+            string b = dateOfBirthTXT.Text;
+            List<char> a = b.Take(4).ToList();
+            string concat = String.Join("", a);
+            int Age = DateTime.Now.Year - Convert.ToInt32(concat);
+            if (MenRadioButton.Checked)
             {
-
+                double PPM = 66.47 + 13.75 * Convert.ToInt32(WeightOfPersonTXT.Text) +
+                    (5 * Convert.ToDouble(heighOfPersonTXT.Text) * 100 - (6.75 * Age));
+                PPMLBL.Text = "PPM: " + Convert.ToString(Math.Round(PPM, 3));
             }
-            if(WomenRadioButton.Checked)
+            else if(WomenRadioButton.Checked)
             {
-
+                double PPM = 665.09 + 9.56 * Convert.ToInt32(WeightOfPersonTXT.Text) +
+                    (1.85 * Convert.ToDouble(heighOfPersonTXT.Text) * 100 - (4.67 * Age));
+                PPMLBL.Text = "PPM: " + Convert.ToString(Math.Round(PPM, 3));
             }
+            else
+            {
+                MessageBox.Show("Wybierz płeć");
+                return;
+            }
+            double BMI = Convert.ToDouble(WeightOfPersonTXT.Text) / Convert.ToDouble(Math.Pow(Convert.ToDouble(heighOfPersonTXT.Text), 2));
+            BMILBL.Text = "BMI: " + Convert.ToString(Math.Round(BMI, 2));
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void heighOfPersonTXT_Validating(object sender, CancelEventArgs e)
+        {
+            if (!heighOfPersonTXT.Text.Contains(","))
+            {
+                e.Cancel = true;
+                errorProvider1.SetError(heighOfPersonTXT, "Nieodpowiedni format - musi być przecinek");
+            }
+            else
+            {
+                errorProvider1.SetError(heighOfPersonTXT, "");
+            }
+        }
+
+      
+        private void dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+        }
+
+        private void dataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            allowedFoodRichTextBox.Text = String.Empty;
+            notAllowedFoodRichTextBox.Text = String.Empty;
+            try
+            {
+                foreach (string line in allowedFood)
+                {
+                    string[] tokens = line.Split(',');
+                    if (DiseasesRichTextBox.Text.Contains(tokens[0]))
+                    {
+                        for (int i = 1; i < tokens.Length; i++)
+                        {
+                            if (allowedFoodRichTextBox.Text.Contains(tokens[i]))
+                                continue;
+                            allowedFoodRichTextBox.AppendText(tokens[i] + "\n");
+                        }
+                    }
+                }
+
+                foreach (string line in notAllowedFood)
+                {
+                    string[] tokens = line.Split(',');
+                    if (DiseasesRichTextBox.Text.Contains(tokens[0]))
+                    {
+                        for (int i = 1; i < tokens.Length; i++)
+                        {
+                            if (notAllowedFoodRichTextBox.Text.Contains(tokens[i]))
+                                continue;
+                            notAllowedFoodRichTextBox.AppendText(tokens[i] + "\n");
+                        }
+                    }
+                }
+            }
+            catch { }
         }
     }   
 }
